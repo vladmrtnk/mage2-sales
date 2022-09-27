@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="elogic_sale_entity" engine="innodb">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false"/>
+        <column xsi:type="varchar" name="slug" length="255" nullable="true"/>
+        <column xsi:type="text" name="description" nullable="true"/>
+        <column xsi:type="float" name="percent_discount" nullable="false"/>
+        <column xsi:type="datetime" name="valid_from" nullable="true"/>
+        <column xsi:type="datetime" name="valid_until" nullable="true"/>
+        <column xsi:type="text" name="products" nullable="true"/>
+        <column xsi:type="int" name="catalog_price_rule_id" nullable="true"/>
+        <column xsi:type="text" name="sale_image_path" nullable="true"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" default="false"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="SALE_ENTITY_SALE_ID_SLUG_KEY">
+            <column name="entity_id"/>
+            <column name="slug"/>
+        </constraint>
+    </table>
+
+<!--    <table name="elogic_product_sale_relation" engine="innodb">-->
+<!--        <column xsi:type="int" name="product_id" nullable="false"-->
+<!--                identity="false" unsigned="true"/>-->
+<!--        <column xsi:type="int" name="sale_id" nullable="false"-->
+<!--                identity="false" unsigned="true"/>-->
+
+<!--        <constraint xsi:type="primary" referenceId="PRIMARY">-->
+<!--            <column name="product_id"/>-->
+<!--            <column name="sale_id"/>-->
+<!--        </constraint>-->
+
+<!--        <constraint xsi:type="foreign" referenceId="PROD_SALE_REL_SALE_ID_SALE_ID"-->
+<!--                    table="elogic_product_sale_relation" column="product_id"-->
+<!--                    referenceTable="catalog_product_entity" referenceColumn="entity_id"-->
+<!--                    onDelete="CASCADE"/>-->
+<!--        <constraint xsi:type="foreign" referenceId="PROD_SALE_REL_PROD_ID_PROD_ID"-->
+<!--                    table="elogic_product_sale_relation" column="sale_id"-->
+<!--                    referenceTable="elogic_sale_entity" referenceColumn="entity_id"-->
+<!--                    onDelete="CASCADE"/>-->
+
+<!--        <constraint xsi:type="unique" referenceId="PROD_SALE_REL_PROD_ID_SALE_ID_KEY">-->
+<!--            <column name="product_id"/>-->
+<!--            <column name="sale_id"/>-->
+<!--        </constraint>-->
+<!--        <index referenceId="PROD_SALE_REL_PROD_ID_INDEX" indexType="btree">-->
+<!--            <column name="product_id"/>-->
+<!--        </index>-->
+<!--    </table>-->
+</schema>
